@@ -13,7 +13,7 @@ public:
   {
     Position();
   }
-  
+
   Bullet(Bullet const & obj)
     : m_origin(obj.m_origin)
     , m_direction(obj.m_direction)
@@ -66,10 +66,10 @@ public:
   {
     try
     {
-      if (length < 1e-5) throw std::invalid_argument("The length can not be negative");
+      if (fabs(length) < 1e-5) throw std::invalid_argument("The length can not be equal to 0");
       m_length = length;
     }
-    catch (const std::exception & ex)
+    catch (const std::exception const & ex)
     {
       std::cerr << ex.what();
     }
@@ -78,10 +78,10 @@ public:
   {
     try
     {
-      if (width < 1e-5) throw std::invalid_argument("The width can not be negative");
+      if (fabs(width) < 1e-5) throw std::invalid_argument("The width can not be equal to 0");
       m_width = width;
     }
-    catch (const std::exception & ex)
+    catch (const std::exception const & ex)
     {
       std::cerr << ex.what();
     }
@@ -104,7 +104,7 @@ private:
 
   Point2D m_origin = { 0.0f, 0.0f };
   Point2D m_direction = { 1.0f, 0.0f };
-  Box2D m_position = { 0.0f, 0.0f, 0.1f, 0.1f };
+  Box2D m_position = { 0.0f, 0.0f, 0.2f, 0.4f };
   float m_speed = 1.0f;
   float m_length = 0.4f;
   float m_width = 0.2f;

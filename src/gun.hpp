@@ -9,7 +9,7 @@ public:
 
   Gun() = default;
 
-  Gun(int ammo) :m_ammo(ammo) {}
+  Gun(int ammo) : m_ammo(ammo) {}
 
   Gun(Box2D && position) :m_position(std::move(position)) {}
 
@@ -23,6 +23,15 @@ public:
     return *this;
   }
 
+  Gun & operator = (Gun const & gun)
+  {
+    if (this == &gun) return *this;
+    m_ammo = gun.GetAmmo();
+    return *this;
+  }
+
+  bool operator == (Gun const & gun) const { return m_ammo == gun.m_ammo; }
+
   void SetAmmo(unsigned int && ammo) { m_ammo = std::move(ammo); }
   void SetDirection(Point2D && direction) { m_direction = std::move(direction); }
   void SetPosition(Box2D && position) { m_position = std::move(position); }
@@ -33,13 +42,16 @@ public:
 
   Bullet Shot()
   {
-    if (m_ammo > 0)
+    try
     {
+      if (m_ammo == 0) throw std::invalid_argument("Ammo run out");
       m_ammo--;
-      Bullet bullet(m_position.Center(), m_direction);
-      return bullet;
+      return Bullet(m_position.Center(), m_direction);
     }
-    return;
+    catch (const std::exception const & ex)
+    {
+      std::cerr << ex.what();
+    }
   }
 
   void Move() override {}
