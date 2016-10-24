@@ -12,7 +12,7 @@ public:
 
   void Damage (float const & damage)
   {
-    if (m_healt - damage > 0)
+    if (m_health - damage > 0)
         m_health = m_health - damage;
     else
       m_health = 0; 
