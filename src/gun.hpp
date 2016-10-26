@@ -3,7 +3,7 @@
 #include "gameentity.hpp"
 #include "bullet.hpp"
 
-class Gun :public GameEntity
+class Gun : public GameEntity
 {
 public:
 
@@ -11,9 +11,9 @@ public:
 
   Gun(int ammo) : m_ammo(ammo) {}
 
-  Gun(Box2D && position) :m_position(std::move(position)) {}
+  Gun(Box2D && position) : m_position(std::move(position)) {}
 
-  Gun(Gun const & obj) :m_ammo(obj.m_ammo) {}
+  Gun(Gun const & obj) : m_ammo(obj.m_ammo) {}
 
   Gun(Gun && obj) { std::swap(m_ammo, obj.m_ammo); }
 
@@ -23,22 +23,14 @@ public:
     return *this;
   }
 
-  Gun & operator = (Gun const & gun)
+  Gun & operator = (Gun const & obj)
   {
-    if (this == &gun) return *this;
-    m_ammo = gun.GetAmmo();
+    if (this == &obj) return *this;
+    m_ammo = obj.GetAmmo();
     return *this;
   }
 
-  bool operator == (Gun const & gun) const { return m_ammo == gun.m_ammo; }
-
-  void SetAmmo(unsigned int && ammo) { m_ammo = std::move(ammo); }
-  void SetDirection(Point2D && direction) { m_direction = std::move(direction); }
-  void SetPosition(Box2D && position) { m_position = std::move(position); }
-
-  unsigned int GetAmmo() const { return m_ammo; }
-  Point2D GetDirection() const { return m_direction; }
-  Box2D GetPosition() const { return m_position; }
+  bool operator == (Gun const & obj) const { return m_ammo == obj.m_ammo; }
 
   Bullet Shot()
   {
@@ -54,12 +46,31 @@ public:
     }
   }
 
+  void Damage(float const & damage)
+  {
+    if (m_health - damage > 0)
+      m_health -= damage;
+    else
+      m_health = 0;
+  }
+
   void Move() override {}
+
+  void SetHealth(float health) { m_health = health; }
+  void SetAmmo(unsigned int ammo) { m_ammo = ammo; }
+  void SetDirection(Point2D && direction) { m_direction = std::move(direction); }
+  void SetPosition(Box2D && position) { m_position = std::move(position); }
+
+  float const GetHealth() const { return m_health; }
+  unsigned int GetAmmo() const { return m_ammo; }
+  Point2D GetDirection() const { return m_direction; }
+  Box2D GetPosition() const { return m_position; }
 
 private:
 
   unsigned int m_ammo = 10;
-  Point2D m_direction = { 1.0f, 0.0f };
+  float m_health = 100.0f;
+  Point2D m_direction = { 0.0f, 1.0f };
   Box2D m_position = { 0.0f, 0.0f, 1.0f, 1.0f };
 
 };

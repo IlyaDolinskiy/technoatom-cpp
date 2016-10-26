@@ -2,7 +2,7 @@
 
 #include "gameentity.hpp"
 
-class Bullet :public GameEntity
+class Bullet : public GameEntity
 {
 public:
   Bullet() = default;
@@ -60,7 +60,7 @@ public:
     m_origin = std::move(origin);
     Position();
   }
-  void SetDirection(Point2D && direction) { m_direction = std::move(m_direction); }
+  void SetDirection(Point2D && direction) { m_direction = std::move(direction); }
   void SetSpeed(float const & speed) { m_speed = speed; }
   void SetLength(float const & length)
   {
@@ -102,11 +102,11 @@ private:
 
   Point2D VectorSpeed() { return m_direction*m_speed; }
 
-  Point2D m_origin = { 0.0f, 0.0f };
-  Point2D m_direction = { 1.0f, 0.0f };
-  Box2D m_position = { 0.0f, 0.0f, 0.2f, 0.4f };
   float m_speed = 1.0f;
   float m_length = 0.4f;
   float m_width = 0.2f;
+  Point2D m_origin = { 0.0f, 0.0f };
+  Point2D m_direction = { 1.0f, 0.0f };
+  Box2D m_position = { 0.0f, 0.0f, 0.2f, 0.4f };
 
 };

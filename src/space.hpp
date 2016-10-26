@@ -1,7 +1,5 @@
 #pragma once
-#include "box2d.hpp"
-#include "ray2d.hpp"
-#include "point2d.hpp"
+
 #include "gameentity.hpp"
 #include <list>
 

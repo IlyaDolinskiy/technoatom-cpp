@@ -1,43 +1,51 @@
 #pragma once
-#include "box2d.hpp"
-#include "ray2d.hpp"
-#include "point2d.hpp"
+
 #include "gameentity.hpp"
 
 class Obstacle : public GameEntity
 {
 public:
+
   Obstacle() = default;
-  
-  Obstacle(Point2D const & min, Point2D const & max) : m_min(min), m_max(max) {}
 
-  void SetPosition(Point2D const & min, Point2D const & max)
+  Obstacle(Box2D && position) : m_position(std::move(position)) {}
+
+  Obstacle(Obstacle const & obj) : m_position(obj.m_position) {}
+
+  Obstacle(Obstacle && obj) { std::swap(m_position, obj.m_position); }
+
+  Obstacle & operator = (Obstacle && obj)
   {
-    m_min = min;
-    m_max = max;
+    std::swap(m_position, obj.m_position);
+    return *this;
   }
 
-  Box2D GetPosition() const
+  Obstacle & operator = (Obstacle const & obj)
   {
-    Box2D m_position = Box2D(m_min, m_max);
-    return m_position;
+    if (this == &obj) return *this;
+    m_position = obj.GetPosition();
+    return *this;
   }
 
-  void SetHealth (float health)
-  {
-    m_health = health;
-  }
+  bool operator == (Obstacle const & obj) const { return m_position == obj.m_position; }
 
-  void Damage (float const & damage)
+  void Damage(float const & damage)
   {
     if (m_health - damage > 0)
-      m_health = m_health - damage;
+      m_health -= damage;
     else
       m_health = 0;
   }
 
+  void SetPosition(Box2D && position) { m_position = std::move(position); }
+  void SetHealth(float health) { m_health = health; }
+
+  Box2D const GetPosition() const { return m_position; }
+  float const GetHealth() const { return m_health; }
+
 private:
-  Point2D m_min = { 0.0f, 0.0f };
-  Point2D m_max = { 1.0f, 1.0f };
+
+  Box2D m_position = { 0.0f, 0.0f, 1.0f, 1.0f };
   float m_health = 50.0f;
+
 };
