@@ -1,6 +1,7 @@
 #pragma once
 
 #include "gameentity.hpp"
+#include "bullet.hpp"
 
 class Alien : public GameEntity
 {
