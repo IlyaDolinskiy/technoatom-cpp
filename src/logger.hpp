@@ -4,7 +4,6 @@
 #include <memory>
 #include <ostream>
 #include <sstream>
-#include "logger.hpp"
 #include "space.hpp"
 
 enum class GameAction { Create, Damage, Destruction };
