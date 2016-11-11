@@ -8,28 +8,21 @@ class Alien : public GameEntity
 public:
 
   Alien() = default;
-
   Alien(Box2D && position) : m_position(std::move(position)) {}
-
   Alien(Alien const & obj) : m_position(obj.m_position) {}
-
   Alien(Alien && obj) { std::swap(m_position, obj.m_position); }
-
   Alien & operator = (Alien && obj)
   {
     std::swap(m_position, obj.m_position);
     return *this;
   }
-
   Alien & operator = (Alien const & obj)
   {
     if (this == &obj) return *this;
     m_position = obj.GetPosition();
     return *this;
   }
-
   bool operator == (Alien const & obj) const { return m_position == obj.m_position; }
-
 
   void Damage(float const & damage)
   {
@@ -55,12 +48,17 @@ public:
     }
   }
 
+  friend std::ostream & operator << (std::ostream & os, Alien const & obj)
+  {
+    os << "[Alien]: { " << obj.GetPosition() << " }; Ammo=" << obj.GetAmmo() << "; Health=" << obj.GetHealth() << "; Speed=" << obj.GetSpeed() << "; Direction: { " << obj.GetDirection() << " }" << std::endl;
+    return os;
+  }
+
   void SetAmmo(unsigned int ammo) { m_ammo = ammo; }
   void SetHealth(float health) { m_health = health; }
   void SetSpeed(float speed) { m_speed = speed; }
   void SetPosition(Box2D && position) { m_position = std::move(position); }
   void SetDirection(Point2D && direction) { m_direction = std::move(direction); }
-
   unsigned int GetAmmo() const { return m_ammo; }
   float const GetHealth() const { return m_health; }
   float const GetSpeed() const { return m_speed; }

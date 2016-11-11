@@ -144,14 +144,14 @@ public:
     return index == 0 ? m_x : m_y;
   }
 
-  struct Hash
-  {
-    size_t operator()(Point2D const & p) const
-    {
-      auto hasher = std::hash<float>();
-      return (hasher(p.x()) ^ (hasher(p.y()) << 1));
-    }
-  };
+  //struct Hash
+  //{
+  //  size_t operator()(Point2D const & p) const
+  //  {
+  //    auto hasher = std::hash<float>();
+  //    return (hasher(p.x()) ^ (hasher(p.y()) << 1));
+  //  }
+  //};
 
   friend std::ostream & operator << (std::ostream & os, Point2D const & obj)
   {

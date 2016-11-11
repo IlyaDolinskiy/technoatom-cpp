@@ -1,30 +1,24 @@
 #pragma once
 
+#include "logger.hpp"
 #include "gameentity.hpp"
 #include <list>
+#include <vector>
+#include <iostream>
+#include <memory>
 
 class Space
 {
 public:
+
   Space() = default;
-
-  std::list<GameEntity*> const & List() const
-  {
-    return m_list;
-  }
-
-  float x_Size() const
-  {
-    return ( m_position.boxMax().x() - m_position.boxMin().x() );
-  }
-
-  float y_Size() const  
-  { 
-    return ( m_position.boxMax().y() - m_position.boxMin().y() );
-  }
-
-
+  Box2D const & GetPosition() const { return m_position; }
+    
 private:
-  Box2D m_position = {10.0f, 10.0f, 100.0f, 100.0f};
-  std::list<GameEntity*> m_list;
+
+  Box2D m_position = { 0.0f, 0.0f, 100.0f, 100.0f };
+
+  //std::list<std::shared_ptr<Alien>> m_alien;
+  //std::list<std::shared_ptr<Bullet>> m_bullet;
+  //std::list<std::shared_ptr<Obstacle>> m_obstacle;
 };

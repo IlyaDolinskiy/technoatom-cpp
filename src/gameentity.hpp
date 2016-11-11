@@ -2,6 +2,7 @@
 
 #include "box2d.hpp"
 #include "ray2d.hpp"
+#include "logger.hpp"
 
 class GameEntity
 {
@@ -12,6 +13,5 @@ public:
   virtual void Move() = 0;
 
 protected:
-
-
+  
 };

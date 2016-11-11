@@ -84,15 +84,15 @@ TEST(point2d_test, test_square_brackets)
   EXPECT_EQ(p1[2], 0.0f);
 }
 
-TEST(point2d_test, test_hash)
-{
-  Point2D::Hash hasher;
-  EXPECT_EQ(hasher(Point2D(0.0f, 0.0f)), 0);
-  std::unordered_set<Point2D, Point2D::Hash> hashTable;
-  hashTable.insert(Point2D(0.0f, 0.0f));
-  hashTable.insert(Point2D(1.0f, 0.0f));
-  EXPECT_EQ(hashTable.size(), 2);
-}
+//TEST(point2d_test, test_hash)
+//{
+//  Point2D::Hash hasher;
+//  EXPECT_EQ(hasher(Point2D(0.0f, 0.0f)), 0);
+//  std::unordered_set<Point2D, Point2D::Hash> hashTable;
+//  hashTable.insert(Point2D(0.0f, 0.0f));
+//  hashTable.insert(Point2D(1.0f, 0.0f));
+//  EXPECT_EQ(hashTable.size(), 2);
+//}
 
 TEST(point2d_test, test_output)
 {

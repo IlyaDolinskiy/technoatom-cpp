@@ -6,7 +6,7 @@
 TEST(bullet_test, bullet_construction)
 {
   Bullet bullet1;
-  EXPECT_EQ(bullet1.GetPosition(), Box2D(Point2D{ 0.0f, 0.0f }, Point2D{ 0.1f, 0.1f }));
+  EXPECT_EQ(bullet1.GetPosition(), Box2D(Point2D{ 0.0f, 0.0f }, Point2D{ 0.2f, 0.4f }));
   EXPECT_EQ(bullet1.GetOrigin(), Point2D(0.0f, 0.0f));
   EXPECT_EQ(bullet1.GetDirection(), Point2D(1.0f, 0.0f));
 
@@ -27,8 +27,8 @@ TEST(bullet_test, bullet_set_get)
   EXPECT_EQ(bullet1.GetDirection(), Point2D(1.0f, 0.0f));
   bullet1.SetSpeed(1.0f);
   EXPECT_EQ(bullet1.GetSpeed(), 1.0f);
-  bullet1.SetLength(5.0f);
-  EXPECT_EQ(bullet1.GetLength(), 5.0f);
+  bullet1.SetHeight(5.0f);
+  EXPECT_EQ(bullet1.GetHeight(), 5.0f);
   bullet1.SetWidth(10.0f);
   EXPECT_EQ(bullet1.GetWidth(), 10.0f);
 }

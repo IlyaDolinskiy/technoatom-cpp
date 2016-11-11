@@ -116,6 +116,12 @@ public:
 
   friend bool Intersection(Ray2D const & ray, Box2D const & box) { return Intersection(box, ray); }
 
+  friend std::ostream & operator <<(std::ostream & os, Ray2D const & obj)
+  {
+    os << "Ray 2D { Origin " << obj.origin() << ", Direction " << obj.direction() << "}";
+    return os;
+  }
+
 private:
 
   Point2D m_origin = { 0.0f, 0.0f };
