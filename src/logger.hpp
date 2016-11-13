@@ -6,7 +6,9 @@
 #include <sstream>
 #include "space.hpp"
 
-enum class GameAction { Create, Damage, Destruction };
+std::string const LOG_CREATE = "Create Object: ";
+std::string const LOG_DAMAGE = "Damage Object: ";
+std::string const LOG_DESTRUCTION = "Destruction Object: ";
 
 class Logger
 {
@@ -14,25 +16,15 @@ class Logger
 public:
 
   template<typename T>
-  static std::ostream & Log(std::ostream & os, GameAction action, T const & object)
+  static std::ostream & Log(std::ostream & os, std::string action, T const & object)
   {
-    switch (action)
-    {
-    case GameAction::Create:
-      os << "Create Object: " << object << std::endl;
-      break;
-    case GameAction::Damage:
-      os << "Damage Object: " << object << std::endl;
-      break;
-    case GameAction::Destruction:
-      os << "Destruction Object: " << object << std::endl;
-      break;
-    }
+      os << action << object << std::endl;
+
     return os;
   }
 
   template<typename T, template<typename, typename...> class C, typename... Args>
-  static std::ostream & Log(std::ostream & os, GameAction action, C<T, Args...> const & objs)
+  static std::ostream & Log(std::ostream & os, std::string action, C<T, Args...> const & objs)
   {
     for (auto const & obj : objs)
       Log(os, action, obj);
