@@ -18,9 +18,7 @@ public:
   template<typename T>
   static std::ostream & Log(std::ostream & os, std::string action, T const & object)
   {
-      os << action << object << std::endl;
-
-    return os;
+    return os << action << object << std::endl;;
   }
 
   template<typename T, template<typename, typename...> class C, typename... Args>
