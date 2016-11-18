@@ -87,16 +87,6 @@ public:
     m_max += vectorMove;
   }
 
-//  bool Intersection(Point2D & min, Point2D & max) const
-//  {
-//    return !(m_max[1] <= min[1] || m_min[1] >= max[1] || m_max[0] <= min[0] || m_min[0] >= max[0]);
-//  }
-
-//  friend bool Intersection(Point2D & min, Point2D & max)
-//  {
-//    return !(m_max.y() <= min.y() || m_min.y() >= max.y() || m_max.x() <= min.x() || m_min.x() >= max.x());
-//  }
-
   friend bool Intersection(Box2D const & obj1, Box2D const & obj2)
   {
     return !(obj1.m_max.y() <= obj2.m_min.y() || obj1.m_min.y() >= obj2.m_max.y() || obj1.m_max.x() <= obj2.m_min.x() || obj1.m_min.x() >= obj2.m_max.x());
