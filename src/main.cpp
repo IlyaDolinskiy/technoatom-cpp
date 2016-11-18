@@ -2,6 +2,7 @@
 #include <QMainWindow>
 #include <QSurfaceFormat>
 #include "main_window.hpp"
+#include "game_setting.hpp"
 
 int main(int argc, char ** argv)
 {
@@ -14,5 +15,9 @@ int main(int argc, char ** argv)
 
   MainWindow mw;
   mw.show();
+
+  GameSetting * setting = new GameSetting();
+  setting->show();
+
   return a.exec();
 }
