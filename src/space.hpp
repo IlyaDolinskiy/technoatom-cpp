@@ -1,6 +1,5 @@
 #pragma once
 
-#include "logger.hpp"
 #include "gameentity.hpp"
 #include <list>
 #include <vector>

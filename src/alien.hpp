@@ -42,7 +42,7 @@ public:
       m_ammo--;
       return Bullet(m_position.Center(), m_direction);
     }
-    catch (const std::exception const & ex)
+    catch (std::exception const & ex)
     {
       std::cerr << ex.what();
     }

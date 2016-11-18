@@ -83,15 +83,7 @@ TEST(box2d_test, test_vertex)
   EXPECT_EQ(b1.vertexRB(), Point2D(5.0f, 1.0f));
 }
 
-TEST(box2d_test, test_Intersection_1)
-{
-  Box2D b1 = { Point2D(0.0f, 0.0f), Point2D(4.0f, 2.0f) };
-  EXPECT_EQ(b1.Intersection(Point2D(2.0f, 1.0f), Point2D(6.0f, 3.0f)), true);
-  EXPECT_EQ(b1.Intersection(Point2D(4.0f, 2.0f), Point2D(8.0f, 4.0f)), false);
-  EXPECT_EQ(b1.Intersection(Point2D(5.0f, 3.0f), Point2D(9.0f, 5.0f)), false);
-}
-
-TEST(Box2D_test, test_Intersection_2)
+TEST(Box2D_test, test_Intersection)
 {
   Box2D b1 = { Point2D(0.0f, 0.0f), Point2D(4.0f, 2.0f) };
   Box2D b2 = { Point2D(2.0f, 1.0f), Point2D(6.0f, 3.0f) };

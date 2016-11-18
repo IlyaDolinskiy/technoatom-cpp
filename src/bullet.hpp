@@ -64,7 +64,7 @@ public:
       if (fabs(height) < 1e-5) throw std::invalid_argument("The height can not be equal to 0");
       m_height = height;
     }
-    catch (const std::exception const & ex)
+    catch (std::exception const & ex)
     {
       std::cerr << ex.what();
     }
@@ -76,7 +76,7 @@ public:
       if (fabs(width) < 1e-5) throw std::invalid_argument("The width can not be equal to 0");
       m_width = width;
     }
-    catch (const std::exception const & ex)
+    catch (std::exception const & ex)
     {
       std::cerr << ex.what();
     }
