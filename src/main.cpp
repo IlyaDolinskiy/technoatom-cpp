@@ -2,7 +2,7 @@
 #include <QMainWindow>
 #include <QSurfaceFormat>
 #include "main_window.hpp"
-#include "game_setting.hpp"
+#include "setting_window.hpp"
 
 int main(int argc, char ** argv)
 {
