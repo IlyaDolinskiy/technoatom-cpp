@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 #include <utility>
 #include <memory>
@@ -16,17 +17,39 @@ class Logger
 public:
 
   template<typename T>
-  static std::ostream & Log(std::ostream & os, std::string action, T const & object)
+  Logger & operator << (T const & object)
   {
-    return os << action << object << std::endl;;
+    std::ostringstream m_os;
+    m_os << object;
+    SaveLog(m_os.str());
+    return *this;
   }
 
   template<typename T, template<typename, typename...> class C, typename... Args>
-  static std::ostream & Log(std::ostream & os, std::string action, C<T, Args...> const & objs)
+  Logger & operator << (C<T, Args...> const & objs)
   {
+    std::ostringstream m_os;
+    m_os << "COLLECTION: ";
     for (auto const & obj : objs)
-      Log(os, action, obj);
-    return os;
+      m_os << objs << "; ";
+    SaveLog(m_os.str());
+    return *this;
+  }
+  
+  Logger & operator << (std::string const & str)
+  {
+    std::ostringstream m_os;
+    m_os << str;
+    SaveLog(m_os.str());
+    return *this;
+  }
+
+private:
+
+  std::string os;
+  void SaveLog(std::string oss)
+  {
+    os += oss;
   }
 
 };
