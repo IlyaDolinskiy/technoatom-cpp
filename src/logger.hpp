@@ -21,7 +21,7 @@ public:
   {
     std::ostringstream m_os;
     m_os << object;
-    SaveLog(m_os.str());
+    os += m_os.str();
     return *this;
   }
 
@@ -32,7 +32,7 @@ public:
     m_os << "COLLECTION: ";
     for (auto const & obj : objs)
       m_os << objs << "; ";
-    SaveLog(m_os.str());
+    os += m_os.str();
     return *this;
   }
   
@@ -40,16 +40,12 @@ public:
   {
     std::ostringstream m_os;
     m_os << str;
-    SaveLog(m_os.str());
+    os += m_os.str();
     return *this;
   }
 
 private:
 
   std::string os;
-  void SaveLog(std::string oss)
-  {
-    os += oss;
-  }
 
 };
