@@ -1,4 +1,4 @@
-#include "textured_rect.hpp"
+#include "textured_rect.h"
 
 #include <QPainter>
 #include <QPaintEngine>
