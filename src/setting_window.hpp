@@ -55,6 +55,8 @@ private:
   QGridLayout * m_bulletLayout = nullptr;
   QGridLayout * m_difficultyLayout = nullptr;
   QGridLayout * m_mainLayout = nullptr;
+  void WriteJson();
+  void ReadJson();
 
 private slots:
   void DifficultyChanged(int index);

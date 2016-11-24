@@ -1,6 +1,11 @@
 #include "setting_window.hpp"
 #include "setting.hpp"
 
+#include <json/json.h>
+#include <json/writer.h>
+#include <fstream>
+#include <iostream>
+
 GameSetting::GameSetting(QWidget * parent) : QMainWindow(parent)
 {
 
@@ -168,5 +173,49 @@ void GameSetting::SaveSetting()
   m_setting->SetGunAmountBullet(m_gunAmountBulletSB->value());
   m_setting->SetGunHealth(m_gunHealthSB->value());
   m_setting->SetObstacleHealth(m_obstacleHealthSB->value());
+  WriteJson();
   this->close();
 }
+
+void GameSetting::WriteJson()
+{
+  Json::Value settings;
+  auto & root = settings["settings"];
+
+  root["entities"]["alien"]["health"] = m_alienHealthSB->value();
+  root["entities"]["alien"]["speed"] = m_alienSpeedSB->value();
+  root["entities"]["gun"]["health"] = m_gunHealthSB->value();
+  root["entities"]["gun"]["bulletsCount"] = m_gunAmountBulletSB->value();
+  root["entities"]["obstacle"]["health"] = m_obstacleHealthSB->value();
+  root["entities"]["bullet"]["speed"] = m_bulletSpeedSB->value();
+
+  std::ofstream settingsFile;
+  settingsFile.open("settings.json");
+  if (settingsFile.is_open())
+  {
+    Json::StyledWriter styledWriter;
+    settingsFile << styledWriter.write(settings);
+    settingsFile.close();
+  }
+}
+
+void GameSetting::ReadJson()
+{
+  Json::Value settings;
+  std::ifstream file("settings.json");
+  if (file.is_open())
+  {
+    file >> settings;
+    file.close();
+  }
+
+  Json::Value & entities = settings["settings"]["entities"];
+  std::cout << entities["alien"]["health"].asInt() << std::endl;
+  std::cout << entities["alien"]["speed"].asInt() << std::endl;
+  std::cout << entities["gun"]["health"].asInt() << std::endl;
+  std::cout << entities["gun"]["bulletsCount"].asInt() << std::endl;
+  std::cout << entities["obstacle"]["health"].asInt() << std::endl;
+  std::cout << entities["bullet"]["speed"].asInt() << std::endl;
+}
+
+
