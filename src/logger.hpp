@@ -22,6 +22,7 @@ public:
     std::ostringstream m_os;
     m_os << object;
     os += m_os.str();
+    SaveToFile(m_os.str());
     return *this;
   }
 
@@ -33,11 +34,26 @@ public:
     for (auto const & obj : objs)
       m_os << objs << "; ";
     os += m_os.str();
+    SaveToFile(m_os.str());
     return *this;
   }
 
 private:
 
   std::string os;
+
+  void SaveToFile(std::string str)
+  {
+    std::ofstream f("log.txt", ios::app);
+    if (f.is_open())
+    {
+      f << str;
+      f.close();
+    }
+    else
+    {
+      std::cerr << "Error opening file" << std::endl;
+    }
+  }
 
 };
