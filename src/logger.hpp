@@ -36,14 +36,6 @@ public:
     return *this;
   }
   
-  Logger & operator << (std::string const & str)
-  {
-    std::ostringstream m_os;
-    m_os << str;
-    os += m_os.str();
-    return *this;
-  }
-
 private:
 
   std::string os;
