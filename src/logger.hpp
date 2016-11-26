@@ -6,16 +6,16 @@
 #include <ostream>
 #include <sstream>
 #include "space.hpp"
+#include "singleton.hpp"
 
 std::string const LOG_CREATE = "Create Object: ";
 std::string const LOG_DAMAGE = "Damage Object: ";
 std::string const LOG_DESTRUCTION = "Destruction Object: ";
 
-class Logger
+class Logger : public Singleton<Logger>
 {
 
 public:
-
   template<typename T>
   Logger & operator << (T const & object)
   {
@@ -37,7 +37,8 @@ public:
   }
   
 private:
-
+  Logger() = default;
   std::string os;
+  friend class Singleton<Logger>;
 
 };
