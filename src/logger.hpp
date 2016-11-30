@@ -6,16 +6,16 @@
 #include <ostream>
 #include <sstream>
 #include "space.hpp"
+#include "singleton.hpp"
 
 std::string const LOG_CREATE = "Create Object: ";
 std::string const LOG_DAMAGE = "Damage Object: ";
 std::string const LOG_DESTRUCTION = "Destruction Object: ";
 
-class Logger
+class Logger : public Singleton<Logger>
 {
 
 public:
-
   template<typename T>
   Logger & operator << (T const & object)
   {
@@ -36,16 +36,9 @@ public:
     return *this;
   }
   
-  Logger & operator << (std::string const & str)
-  {
-    std::ostringstream m_os;
-    m_os << str;
-    os += m_os.str();
-    return *this;
-  }
-
 private:
-
+  Logger() = default;
   std::string os;
+  friend class Singleton<Logger>;
 
 };
